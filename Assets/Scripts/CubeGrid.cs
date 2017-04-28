@@ -7,29 +7,32 @@ public class CubeGrid : MonoBehaviour
 
 
     public GameObject prefab;
-    public float offset;
+    [SerializeField]
     private List<GameObject> cubes;
     
     
     // Use this for initialization
     void Start()
     {
-
-
-    }
+         
+         
+    } 
     [ContextMenu("Create")]
     void ShowGrid()
     {
-        GameObject cube;
+
+        cubes = new List<GameObject>();
+        var cube;
         for (int i = 0; i < 5; i++)
         {
             for (int j = 0; j < 5; j++)
             {
                 cube = Instantiate(prefab,this.transform) as GameObject;
-                cube.transform.position = new Vector3(i + offset, 0, j + offset);
+                cube.transform.position = new Vector3(i, 0, j);
                 cubes.Add(cube);
             }
-        }
+        } 
+    
     }
     [ContextMenu("Destroy")]
     void DstroyGrid()
@@ -38,6 +41,7 @@ public class CubeGrid : MonoBehaviour
         {
             DestroyImmediate(item);
         }
+        cubes.Clear();
     }
      
     // Update is called once per frame
